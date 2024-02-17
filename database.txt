@@ -13,7 +13,7 @@ _________________________________________________
 ``````````````````````````````````````````````````
 SELECT id Teacher_ID , name Teacher_Name
 FROM instructor;
---alias should be double quoted if it contains spaces.
+-> alias should be double quoted if it contains spaces.
 SELECT id "Teacher ID" , name "Teacher Name"
 FROM instructor;
 _________________________________________
@@ -27,13 +27,79 @@ ___________________________________________________
 SELECT DISTINCT credits
 FROM course ;
 ___________________________________________________
+6.WHERE clause in SELECT Statement
 ```````````````````````````````````````````````````
+->The WHERE clause is used with one or more conditions to limit rows in the output..
+SELECT name ,salary
+FROM instructor
+WHERE salary>90000;
 ___________________________________________________
+7.Comparison operators
 ```````````````````````````````````````````````````
+->(<=,>=)
+SELECT name ,salary
+FROM instructor
+WHERE salary <= 95000 AND salary >= 80000 ;
+
+->(BETWEEN & AND)
+SELECT name ,salary
+FROM instructor
+WHERE salary BETWEEN 80000 AND 95000;
+
+->(IN)
+SELECT name ,id
+FROM instructor
+WHERE dept_name IN ('Physics' ,'Music') ;
+
+->(LIKE operator)
+SELECT dept_name 
+FROM instructor
+WHERE dept_name LIKE '%s';  -> represent the dept_name end with s.
+
+SELECT dept_name 
+FROM instructor
+WHERE dept_name LIKE 'H%';   -> represent the dept_name start with P.
+
+SELECT dept_name 
+FROM instructor
+WHERE dept_name LIKE 'Music';  -> it's like  = operator .
+
+->( use of _ )
+SELECT dept_name 
+FROM instructor
+WHERE dept_name LIKE '_s';  -> contains exactly two characters and last character must be s.
+
+SELECT dept_name 
+FROM instructor
+WHERE dept_name LIKE '_____'; -> contains 5 character 
+
+SELECT dept_name 
+FROM instructor
+WHERE dept_name LIKE '_%';  -> contains al least one character . i.e not null .
+
 ___________________________________________________
+8.Find max salary from instructor table
 ```````````````````````````````````````````````````
+SELECT name ,salary
+FROM instructor
+WHERE salary = (select  max(salary)
+				from instructor);
+        or,
+SELECT name ,salary
+FROM instructor
+ORDER BY salary DESC
+LIMIT 1;
+
 ___________________________________________________
+9.. Sorting Rows
 ```````````````````````````````````````````````````
+SELECT name ,salary
+FROM instructor
+ORDER BY salary;
+
+SELECT name ,salary
+FROM instructor
+ORDER BY  salary DESC; -> sorting in descending order.
 ___________________________________________________
 ```````````````````````````````````````````````````
 ___________________________________________________
