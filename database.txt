@@ -106,8 +106,59 @@ ___________________________________________________
 ```````````````````````````````````````````````````
 ___________________________________________________
 ```````````````````````````````````````````````````
+SELECT name  , salary
+FROM instructor
+WHERE salary >( 
+     SELECT salary
+     FROM instructor
+     WHERE name = 'Kim'); 
+`````````````````````````````
+SELECT name  , salary
+FROM instructor
+WHERE salary IN ( 
+	SELECT salary
+	FROM instructor
+	WHERE dept_name = 'Comp. Sci.'); 
+
+-- use (IN) for showing all rows of condition
+-- using(=) just show the first row .
+```````````````````````````````````
+SELECT name  , salary
+FROM instructor
+WHERE salary =  ( 
+	SELECT MAX(salary)
+	FROM instructor
+	); 
+````````````````````````````````````
+SELECT name  , dept_name
+FROM instructor
+WHERE dept_name =  ( 
+	SELECT dept_name
+	FROM department
+    WHERE budget = (
+		SELECT MAX(budget) 
+		FROM department)
+	); 
+```````````````````````````````````````````
+Q: student have completed more than avg completed credit .
+
+SELECT name, dept_name
+FROM student
+WHERE tot_cred > (
+   SELECT AVG(tot_cred) FROM student);
+`````````````````````````````````````````````
+Q: uses set operator (UNION , UNION ALL,INTERSECT )
+
+SELECT course_id
+FROM section
+WHERE semester = 'Fall' AND year = 2017
+UNION
+SELECT course_id
+FROM section
+WHERE semester = 'Spring' AND year = 2018;
 ___________________________________________________
 ```````````````````````````````````````````````````
+
 ___________________________________________________
 ```````````````````````````````````````````````````
 ___________________________________________________
